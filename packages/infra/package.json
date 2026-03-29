@@ -1,19 +1,19 @@
 {
-  "name": "@n0k/infra",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "alchemy dev",
-    "deploy": "alchemy deploy",
-    "destroy": "alchemy destroy"
-  },
-  "dependencies": {
-    "dotenv": "catalog:",
-    "zod": "catalog:"
-  },
-  "devDependencies": {
-    "@n0k/config": "workspace:*",
-    "alchemy": "catalog:",
-    "typescript": "^5"
-  }
+	"name": "@n0k/infra",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "alchemy dev",
+		"deploy": "alchemy deploy",
+		"destroy": "alchemy destroy"
+	},
+	"dependencies": {
+		"dotenv": "catalog:",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@n0k/config": "workspace:*",
+		"alchemy": "catalog:",
+		"typescript": "^5"
+	}
 }
