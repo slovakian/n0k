@@ -28,6 +28,10 @@
 .wrangler
 .alchemy
 
+# Local Prisma SQLite (DATABASE_URL=file:.../local.db)
+local.db
+local.db-*
+
 # Environment & local files
 .env*
 !.env.example

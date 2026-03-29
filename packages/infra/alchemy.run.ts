@@ -28,6 +28,9 @@ const db = await D1Database("database", {
 export const webWorker = await TanStackStart("web", {
 	domains: isProduction ? ["n0k.org"] : undefined,
 	cwd: "../../apps/web",
+	// wrangler: {
+	// 	main: "../../apps/web/src/server.ts",
+	// },
 	bindings: {
 		DB: db,
 		CORS_ORIGIN: isProduction
