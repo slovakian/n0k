@@ -1,29 +1,30 @@
 {
-  "name": "@n0k/db",
-  "type": "module",
-  "exports": {
-    ".": {
-      "default": "./src/index.ts"
-    },
-    "./*": {
-      "default": "./src/*.ts"
-    }
-  },
-  "scripts": {
-    "db:push": "drizzle-kit push",
-    "db:generate": "drizzle-kit generate"
-  },
-  "dependencies": {
-    "@libsql/client": "catalog:",
-    "@n0k/env": "workspace:*",
-    "dotenv": "catalog:",
-    "drizzle-orm": "^0.45.1",
-    "libsql": "catalog:",
-    "zod": "catalog:"
-  },
-  "devDependencies": {
-    "@n0k/config": "workspace:*",
-    "drizzle-kit": "^0.31.8",
-    "typescript": "^5"
-  }
+	"name": "@n0k/db",
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./src/index.ts"
+		},
+		"./*": {
+			"default": "./src/*.ts"
+		}
+	},
+	"scripts": {
+		"db:push": "prisma db push",
+		"db:generate": "prisma generate",
+		"db:migrate": "prisma migrate dev",
+		"postinstall": "prisma generate"
+	},
+	"dependencies": {
+		"@n0k/env": "workspace:*",
+		"@prisma/adapter-d1": "^7.2.0",
+		"@prisma/client": "catalog:",
+		"dotenv": "catalog:",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@n0k/config": "workspace:*",
+		"prisma": "^7.2.0",
+		"typescript": "^5"
+	}
 }
