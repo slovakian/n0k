@@ -1,12 +1,22 @@
 /** biome-ignore-all lint/style/noNonNullAssertion: Needed for env */
 import alchemy from "alchemy";
 import { D1Database, TanStackStart, Worker } from "alchemy/cloudflare";
+import { CloudflareStateStore } from "alchemy/state";
 import { config } from "dotenv";
 
 config({ path: "./.env" });
 config({ path: "../../apps/web/.env" });
 
-const app = await alchemy("n0k");
+const app = await alchemy("n0k", {
+	stateStore:
+		process.env.NODE_ENV === "production" || process.env.CI
+			? (scope) =>
+					new CloudflareStateStore(scope, {
+						stateToken: alchemy.secret(process.env.ALCHEMY_STATE_TOKEN),
+					})
+			: undefined, // Uses default FileSystemStateStore
+	password: process.env.ALCHEMY_PASSWORD!, // Not used in local dev
+});
 
 const isProduction = app.stage === "prod";
 const isPr = app.stage.startsWith("pr-");
