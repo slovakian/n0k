@@ -22,8 +22,7 @@ const isProduction = app.stage === "prod";
 const isPr = app.stage.startsWith("pr-");
 
 const db = await D1Database("database", {
-	migrationsDir: "../../packages/db/src/migrations",
-	adopt: true,
+	migrationsDir: "../../packages/db/prisma/migrations",
 });
 
 export const webWorker = await TanStackStart("web", {
