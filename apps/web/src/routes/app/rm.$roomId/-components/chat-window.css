@@ -1,0 +1,23 @@
+@layer components {
+  /*
+   * column-reverse anchors the scroll position to the visual bottom.
+   * Newest message is first in DOM order → appears at the visual bottom.
+   * Oldest message is last in DOM order → appears at the visual top.
+   * New messages push upward without needing any scrollIntoView JS.
+   */
+  .chat-window {
+    display: flex;
+    flex-direction: column-reverse;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    padding: 0.5lh 1ch;
+    gap: 0.25lh;
+  }
+
+  .chat-window__empty {
+    color: var(--foreground2, var(--webtui-foreground-2));
+    font-style: italic;
+    align-self: flex-end;
+  }
+}

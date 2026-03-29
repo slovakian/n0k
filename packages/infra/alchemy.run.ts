@@ -1,6 +1,11 @@
 /** biome-ignore-all lint/style/noNonNullAssertion: Needed for env */
 import alchemy from "alchemy";
-import { D1Database, TanStackStart, Worker } from "alchemy/cloudflare";
+import {
+	D1Database,
+	DurableObjectNamespace,
+	TanStackStart,
+	Worker,
+} from "alchemy/cloudflare";
 import { GitHubComment } from "alchemy/github";
 import { CloudflareStateStore } from "alchemy/state";
 import { config } from "dotenv";
@@ -23,8 +28,10 @@ const isProduction = app.stage === "prod";
 const isPr = app.stage.startsWith("pr-");
 
 const db = await D1Database("database", {
-	migrationsDir: "../../packages/db/prisma/migrations",
+	migrationsDir: "../../packages/db/src/migrations",
 });
+
+const chatRoom = DurableObjectNamespace("chat-room", { className: "ChatRoom" });
 
 export const webWorker = await TanStackStart("web", {
 	domains: isProduction ? ["n0k.org"] : undefined,
@@ -34,6 +41,7 @@ export const webWorker = await TanStackStart("web", {
 	// },
 	bindings: {
 		DB: db,
+		ROOM: chatRoom,
 		CORS_ORIGIN: isProduction
 			? "https://n0k.org"
 			: isPr

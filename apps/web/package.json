@@ -19,6 +19,11 @@
 		"@tanstack/react-start": "^1.141.1",
 		"@tanstack/router-plugin": "^1.141.1",
 		"@webtui/css": "^0.1.7",
+		"@webtui/theme-catppuccin": "^0.0.4",
+		"@webtui/theme-everforest": "^0.0.4",
+		"@webtui/theme-gruvbox": "^0.0.2",
+		"@webtui/theme-nord": "^0.0.3",
+		"@webtui/theme-vitesse": "^0.0.2",
 		"better-auth": "catalog:",
 		"dotenv": "catalog:",
 		"libsql": "catalog:",
@@ -26,7 +31,8 @@
 		"react-dom": "catalog:",
 		"sonner": "catalog:",
 		"vite-tsconfig-paths": "^5.1.4",
-		"zod": "catalog:"
+		"zod": "catalog:",
+		"zustand": "^5.0.12"
 	},
 	"devDependencies": {
 		"@cloudflare/vite-plugin": "^1.17.1",

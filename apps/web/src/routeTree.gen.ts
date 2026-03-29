@@ -9,11 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MechanicsRouteImport } from './routes/mechanics'
 import { Route as AppRouteRouteImport } from './routes/app/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as AppRmRoomIdRouteRouteImport } from './routes/app/rm.$roomId/route'
+import { Route as AppRmRoomIdIndexRouteImport } from './routes/app/rm.$roomId/index'
+import { Route as ApiRoomRoomIdWsRouteImport } from './routes/api/room/$roomId/ws'
 
+const MechanicsRoute = MechanicsRouteImport.update({
+  id: '/mechanics',
+  path: '/mechanics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppRouteRoute = AppRouteRouteImport.update({
   id: '/app',
   path: '/app',
@@ -34,41 +43,99 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRmRoomIdRouteRoute = AppRmRoomIdRouteRouteImport.update({
+  id: '/rm/$roomId',
+  path: '/rm/$roomId',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppRmRoomIdIndexRoute = AppRmRoomIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRmRoomIdRouteRoute,
+} as any)
+const ApiRoomRoomIdWsRoute = ApiRoomRoomIdWsRouteImport.update({
+  id: '/api/room/$roomId/ws',
+  path: '/api/room/$roomId/ws',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
+  '/mechanics': typeof MechanicsRoute
   '/app/': typeof AppIndexRoute
+  '/app/rm/$roomId': typeof AppRmRoomIdRouteRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/room/$roomId/ws': typeof ApiRoomRoomIdWsRoute
+  '/app/rm/$roomId/': typeof AppRmRoomIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mechanics': typeof MechanicsRoute
   '/app': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/room/$roomId/ws': typeof ApiRoomRoomIdWsRoute
+  '/app/rm/$roomId': typeof AppRmRoomIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
+  '/mechanics': typeof MechanicsRoute
   '/app/': typeof AppIndexRoute
+  '/app/rm/$roomId': typeof AppRmRoomIdRouteRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/room/$roomId/ws': typeof ApiRoomRoomIdWsRoute
+  '/app/rm/$roomId/': typeof AppRmRoomIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/app/' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/mechanics'
+    | '/app/'
+    | '/app/rm/$roomId'
+    | '/api/auth/$'
+    | '/api/room/$roomId/ws'
+    | '/app/rm/$roomId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app' | '/api/auth/$'
-  id: '__root__' | '/' | '/app' | '/app/' | '/api/auth/$'
+  to:
+    | '/'
+    | '/mechanics'
+    | '/app'
+    | '/api/auth/$'
+    | '/api/room/$roomId/ws'
+    | '/app/rm/$roomId'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/mechanics'
+    | '/app/'
+    | '/app/rm/$roomId'
+    | '/api/auth/$'
+    | '/api/room/$roomId/ws'
+    | '/app/rm/$roomId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRouteRoute: typeof AppRouteRouteWithChildren
+  MechanicsRoute: typeof MechanicsRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiRoomRoomIdWsRoute: typeof ApiRoomRoomIdWsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/mechanics': {
+      id: '/mechanics'
+      path: '/mechanics'
+      fullPath: '/mechanics'
+      preLoaderRoute: typeof MechanicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/app': {
       id: '/app'
       path: '/app'
@@ -97,15 +164,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/rm/$roomId': {
+      id: '/app/rm/$roomId'
+      path: '/rm/$roomId'
+      fullPath: '/app/rm/$roomId'
+      preLoaderRoute: typeof AppRmRoomIdRouteRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/rm/$roomId/': {
+      id: '/app/rm/$roomId/'
+      path: '/'
+      fullPath: '/app/rm/$roomId/'
+      preLoaderRoute: typeof AppRmRoomIdIndexRouteImport
+      parentRoute: typeof AppRmRoomIdRouteRoute
+    }
+    '/api/room/$roomId/ws': {
+      id: '/api/room/$roomId/ws'
+      path: '/api/room/$roomId/ws'
+      fullPath: '/api/room/$roomId/ws'
+      preLoaderRoute: typeof ApiRoomRoomIdWsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AppRmRoomIdRouteRouteChildren {
+  AppRmRoomIdIndexRoute: typeof AppRmRoomIdIndexRoute
+}
+
+const AppRmRoomIdRouteRouteChildren: AppRmRoomIdRouteRouteChildren = {
+  AppRmRoomIdIndexRoute: AppRmRoomIdIndexRoute,
+}
+
+const AppRmRoomIdRouteRouteWithChildren =
+  AppRmRoomIdRouteRoute._addFileChildren(AppRmRoomIdRouteRouteChildren)
+
 interface AppRouteRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
+  AppRmRoomIdRouteRoute: typeof AppRmRoomIdRouteRouteWithChildren
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
+  AppRmRoomIdRouteRoute: AppRmRoomIdRouteRouteWithChildren,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
@@ -115,7 +216,9 @@ const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRouteRoute: AppRouteRouteWithChildren,
+  MechanicsRoute: MechanicsRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiRoomRoomIdWsRoute: ApiRoomRoomIdWsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

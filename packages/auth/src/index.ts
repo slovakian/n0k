@@ -1,23 +1,24 @@
 import { createDb } from "@n0k/db";
+import * as schema from "@n0k/db/schema/auth";
 import { env } from "@n0k/env/web/server";
 import { betterAuth } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 
 export function createAuth() {
-	const db = createDb();
+  const db = createDb();
 
-	return betterAuth({
-		database: prismaAdapter(db, {
-			provider: "sqlite",
-		}),
-
-		trustedOrigins: [env.CORS_ORIGIN],
-		emailAndPassword: {
-			enabled: true,
-		},
-		secret: env.BETTER_AUTH_SECRET,
-		baseURL: env.BETTER_AUTH_URL,
-		plugins: [tanstackStartCookies()],
-	});
+  return betterAuth({
+    database: drizzleAdapter(db, {
+      provider: "sqlite",
+      schema: schema,
+    }),
+    trustedOrigins: [env.CORS_ORIGIN],
+    emailAndPassword: {
+      enabled: true,
+    },
+    secret: env.BETTER_AUTH_SECRET,
+    baseURL: env.BETTER_AUTH_URL,
+    plugins: [tanstackStartCookies()],
+  });
 }

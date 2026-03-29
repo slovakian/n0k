@@ -17,7 +17,7 @@
 			"sonner": "^2.0.5",
 			"tailwindcss": "^4.1.18",
 			"@libsql/client": "0.15.15",
-			"@prisma/client": "^7.2.0",
+			"drizzle-orm": "^0.45.1",
 			"libsql": "0.5.22",
 			"better-auth": "1.5.5",
 			"@types/react": "^19.2.10",
@@ -33,7 +33,6 @@
 		"dev:web": "turbo -F web dev",
 		"db:push": "turbo -F @n0k/db db:push",
 		"db:generate": "turbo -F @n0k/db db:generate",
-		"db:migrate": "turbo -F @n0k/db db:migrate",
 		"deploy": "turbo run deploy --filter=@n0k/infra --",
 		"destroy": "turbo run destroy --filter=@n0k/infra --",
 		"check": "biome check --write ."

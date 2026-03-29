@@ -39,6 +39,13 @@ This is a **web app** styled as a **terminal / TUI** using **WebTUI** (`@webtui/
 
 When in doubt, re-read `.agents/skills/webtui/SKILL.md` rather than guessing class names or HTML patterns from other design systems.
 
+## Component naming convention
+
+**All component files use lowercase with dashes**: `chat-message.tsx`, `chat-input.tsx`, etc. — not PascalCase. This applies to:
+- Component files (`.tsx`)
+- CSS files (`.css`)
+- Component folders in `/-components`
+
 TanStack Intent ships skills under `node_modules`; with Bun, some packages live under `node_modules/.bun/<pkg>@<version>/...`. After major dependency bumps, re-run `npx @tanstack/intent@latest list` and update the `load` paths below if they move.
 
 <!-- intent-skills:start -->

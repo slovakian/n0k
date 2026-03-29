@@ -1,0 +1,121 @@
+@layer components {
+  .room-sidebar {
+    width: 28ch;
+    flex-shrink: 0;
+    overflow-y: auto;
+    border-left: 1px solid var(--foreground0, var(--webtui-foreground-2));
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .room-sidebar__section {
+    padding: 0.5lh 1ch;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25lh;
+  }
+
+  .room-sidebar__label {
+    font-size: 0.75em;
+    letter-spacing: 0.1ch;
+    color: var(--foreground2, var(--webtui-foreground-2));
+    margin-bottom: 0.25lh;
+    text-transform: uppercase;
+  }
+
+  .room-sidebar__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1ch;
+  }
+
+  .room-sidebar__key {
+    color: var(--foreground2, var(--webtui-foreground-2));
+    font-size: 0.85em;
+  }
+
+  .room-sidebar__value {
+    color: var(--foreground0, var(--webtui-foreground-0));
+    text-align: right;
+  }
+
+  .room-sidebar__room-id {
+    font-weight: bold;
+    letter-spacing: 0.05ch;
+  }
+
+  .room-sidebar__unit {
+    font-size: 0.8em;
+    color: var(--foreground2, var(--webtui-foreground-2));
+  }
+
+  /* Temperature display */
+  .room-sidebar__temp {
+    font-weight: bold;
+  }
+
+  /* Fuel primary readout */
+  .room-sidebar__fuel-primary {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: var(--foreground0, var(--webtui-foreground-0));
+    margin-bottom: 0.25lh;
+  }
+
+  /* Drain rate — most important fuel signal */
+  .room-sidebar__drain {
+    font-weight: bold;
+    color: var(--yellow, var(--gb-yellow, var(--nord13, #e5c07b)));
+  }
+
+  /* Platform pulse value */
+  .room-sidebar__pulse-value {
+    font-weight: bold;
+    color: var(--foreground0, var(--webtui-foreground-0));
+    margin-bottom: 0.25lh;
+  }
+
+  /* Grace period */
+  .room-sidebar__grace-expired {
+    color: var(--foreground2, var(--webtui-foreground-2));
+    font-style: italic;
+  }
+
+  /* Status label colors */
+  .room-sidebar__status {
+    font-weight: bold;
+    margin-top: 0.25lh;
+  }
+
+  .room-sidebar__status--inferno {
+    color: var(--red, var(--gb-red, var(--nord11, #e06c75)));
+  }
+
+  .room-sidebar__status--hot {
+    color: var(--orange, var(--gb-orange, var(--nord12, #d19a66)));
+  }
+
+  .room-sidebar__status--active {
+    color: var(--green, var(--gb-green, var(--nord14, #98c379)));
+  }
+
+  .room-sidebar__status--cooling {
+    color: var(--yellow, var(--gb-yellow, var(--nord13, #e5c07b)));
+  }
+
+  .room-sidebar__status--critical {
+    color: var(--red, var(--gb-red, var(--nord11, #e06c75)));
+    animation: blink 1s step-end infinite;
+  }
+
+  .room-sidebar__status--dead {
+    color: var(--foreground2, var(--webtui-foreground-2));
+  }
+
+  @keyframes blink {
+    50% { opacity: 0.3; }
+  }
+}

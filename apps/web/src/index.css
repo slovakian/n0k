@@ -2,25 +2,44 @@
 
 @import "@webtui/css/base.css";
 
+/* Theme plugins — imported after base so they override correctly */
+@import "@webtui/theme-catppuccin";
+@import "@webtui/theme-gruvbox";
+@import "@webtui/theme-nord";
+@import "@webtui/theme-vitesse";
+@import "@webtui/theme-everforest";
+
 /* Utils */
 @import "@webtui/css/utils/box.css";
 
-/* Components — add more per route/feature as needed */
+/* Components */
 @import "@webtui/css/components/typography.css";
 @import "@webtui/css/components/button.css";
 @import "@webtui/css/components/input.css";
 @import "@webtui/css/components/separator.css";
 @import "@webtui/css/components/spinner.css";
+@import "@webtui/css/components/badge.css";
 
 @layer base {
-	.app-shell {
-		min-height: 100dvh;
-		display: flex;
-		flex-direction: column;
-	}
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
 
-	.app-shell-main {
-		flex: 1;
-		min-height: 0;
-	}
+  .app-shell {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .app-shell-main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
 }

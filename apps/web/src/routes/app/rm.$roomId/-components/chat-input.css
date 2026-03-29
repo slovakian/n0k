@@ -1,0 +1,35 @@
+@layer components {
+  .chat-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5ch;
+    padding: 0.25lh 1ch;
+    border-top: 1px solid var(--foreground0, var(--webtui-foreground-2));
+    flex-shrink: 0;
+  }
+
+  .chat-input__prompt {
+    color: var(--green, var(--gb-green, var(--nord14, #98c379)));
+    font-weight: bold;
+    flex-shrink: 0;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .chat-input__field {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--foreground0, var(--webtui-foreground-0));
+    font-family: inherit;
+    font-size: inherit;
+    caret-color: var(--foreground0, var(--webtui-foreground-0));
+    padding: 0;
+  }
+
+  .chat-input__field::placeholder {
+    color: var(--foreground2, var(--webtui-foreground-2));
+  }
+}

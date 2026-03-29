@@ -10,21 +10,20 @@
 		}
 	},
 	"scripts": {
-		"db:push": "prisma db push",
-		"db:generate": "prisma generate",
-		"db:migrate": "prisma migrate dev",
-		"postinstall": "prisma generate"
+		"db:push": "drizzle-kit push",
+		"db:generate": "drizzle-kit generate"
 	},
 	"dependencies": {
+		"@libsql/client": "catalog:",
 		"@n0k/env": "workspace:*",
-		"@prisma/adapter-d1": "^7.2.0",
-		"@prisma/client": "catalog:",
 		"dotenv": "catalog:",
+		"drizzle-orm": "^0.45.1",
+		"libsql": "catalog:",
 		"zod": "catalog:"
 	},
 	"devDependencies": {
 		"@n0k/config": "workspace:*",
-		"prisma": "^7.2.0",
+		"drizzle-kit": "^0.31.8",
 		"typescript": "^5"
 	}
 }

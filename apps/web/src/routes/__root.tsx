@@ -5,6 +5,7 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { useThemeStore } from "../Features/theme-store";
 
 import appCss from "../index.css?url";
 
@@ -37,8 +38,10 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 });
 
 function RootDocument() {
+	const theme = useThemeStore((state) => state.theme);
+
 	return (
-		<html lang="en" data-webtui-theme="dark">
+		<html lang="en" data-webtui-theme={theme}>
 			<head>
 				<HeadContent />
 			</head>
@@ -48,7 +51,7 @@ function RootDocument() {
 						<Outlet />
 					</div>
 				</div>
-				<TanStackRouterDevtools position="bottom-left" />
+				<TanStackRouterDevtools position="top-right" />
 				<Scripts />
 			</body>
 		</html>
