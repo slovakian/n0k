@@ -29,6 +29,7 @@ const isPr = app.stage.startsWith("pr-");
 
 const db = await D1Database("database", {
 	migrationsDir: "../../packages/db/src/migrations",
+	adopt: true,
 });
 
 const chatRoom = DurableObjectNamespace("chat-room", { className: "ChatRoom" });
