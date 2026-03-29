@@ -38,3 +38,22 @@ This is a **web app** styled as a **terminal / TUI** using **WebTUI** (`@webtui/
 - Prefer **per-file ESM imports** where appropriate (e.g. `import '@webtui/css/components/button.css'`) after globals define layers.
 
 When in doubt, re-read `.agents/skills/webtui/SKILL.md` rather than guessing class names or HTML patterns from other design systems.
+
+TanStack Intent ships skills under `node_modules`; with Bun, some packages live under `node_modules/.bun/<pkg>@<version>/...`. After major dependency bumps, re-run `npx @tanstack/intent@latest list` and update the `load` paths below if they move.
+
+<!-- intent-skills:start -->
+# Skill mappings - when working in these areas, load the linked skill file into context.
+skills:
+  - task: "TanStack DB React hooks: useLiveQuery, useLiveSuspenseQuery, useLiveInfiniteQuery, usePacedMutations; imports from @tanstack/react-db"
+    load: "node_modules/@tanstack/react-db/skills/react-db/SKILL.md"
+  - task: "TanStack Start app shell, Vite plugin, root route document, client/server entrypoints, routeTree.gen.ts"
+    load: "node_modules/.bun/@tanstack+start-client-core@1.167.7/node_modules/@tanstack/start-client-core/skills/start-core/SKILL.md"
+  - task: "File-based routes, route tree, matching, path and search params, router types and Register"
+    load: "node_modules/.bun/@tanstack+router-core@1.168.7/node_modules/@tanstack/router-core/skills/router-core/SKILL.md"
+  - task: "Route loaders, loaderDeps, pending/error components, deferred data, router cache and invalidation"
+    load: "node_modules/.bun/@tanstack+router-core@1.168.7/node_modules/@tanstack/router-core/skills/router-core/data-loading/SKILL.md"
+  - task: "createServerFn, server middleware, request context, validators, calling server functions from React"
+    load: "node_modules/.bun/@tanstack+start-client-core@1.167.7/node_modules/@tanstack/start-client-core/skills/start-core/server-functions/SKILL.md"
+  - task: "Deploying TanStack Start to Cloudflare Workers, SSR/SPA modes, prerender and caching headers"
+    load: "node_modules/.bun/@tanstack+start-client-core@1.167.7/node_modules/@tanstack/start-client-core/skills/start-core/deployment/SKILL.md"
+<!-- intent-skills:end -->

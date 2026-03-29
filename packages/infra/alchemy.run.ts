@@ -26,7 +26,8 @@ const db = await D1Database("database", {
 	adopt: true,
 });
 
-export const appWorker = await TanStackStart("app", {
+export const webWorker = await TanStackStart("web", {
+	domains: isProduction ? ["n0k.org"] : undefined,
 	cwd: "../../apps/web",
 	bindings: {
 		DB: db,
@@ -45,6 +46,6 @@ export const appWorker = await TanStackStart("app", {
 	},
 });
 
-console.log(`Web    -> ${appWorker.url}`);
+console.log(`Web    -> ${webWorker.url}`);
 
 await app.finalize();

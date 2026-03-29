@@ -1,2 +1,26 @@
-@source "../../../apps/**/*.{ts,tsx}";
-@source "../**/*.{ts,tsx}";
+@layer base, utils, components;
+
+@import "@webtui/css/base.css";
+
+/* Utils */
+@import "@webtui/css/utils/box.css";
+
+/* Components — add more per route/feature as needed */
+@import "@webtui/css/components/typography.css";
+@import "@webtui/css/components/button.css";
+@import "@webtui/css/components/input.css";
+@import "@webtui/css/components/separator.css";
+@import "@webtui/css/components/spinner.css";
+
+@layer base {
+	.app-shell {
+		min-height: 100dvh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.app-shell-main {
+		flex: 1;
+		min-height: 0;
+	}
+}
