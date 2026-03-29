@@ -32,8 +32,8 @@
     "dev:web": "turbo -F web dev",
     "db:push": "turbo -F @n0k/db db:push",
     "db:generate": "turbo -F @n0k/db db:generate",
-    "deploy": "turbo -F @n0k/infra deploy",
-    "destroy": "turbo -F @n0k/infra destroy",
+    "deploy": "turbo run deploy --filter=@n0k/infra --",
+    "destroy": "turbo run destroy --filter=@n0k/infra --",
     "check": "biome check --write ."
   },
   "dependencies": {
