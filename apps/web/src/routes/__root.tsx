@@ -8,6 +8,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 import appCss from "../index.css?url";
 
+// biome-ignore lint/complexity/noBannedTypes: Temporary empty context
 export type RouterAppContext = {};
 
 export const Route = createRootRouteWithContext<RouterAppContext>()({
@@ -21,7 +22,7 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "My App",
+				title: "n0k",
 			},
 		],
 		links: [
