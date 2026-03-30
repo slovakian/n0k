@@ -1,47 +1,47 @@
 @layer components {
-  /* Outer full-height wrapper — flex: 1 fills the flex parent (.app-shell-main) */
-  .chat-page {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: 0;
-    overflow: hidden;
-  }
+	/* Outer full-height wrapper — flex: 1 fills the flex parent (.app-shell-main) */
+	.chat-page {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		min-height: 0;
+		overflow: hidden;
+	}
 
-  /* Scrollable header strip */
-  .chat-page__header {
-    padding: 0 1ch;
-    height: 1lh;
-    border-bottom: 1px solid var(--foreground0, var(--webtui-foreground-2));
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 1ch;
-  }
+	/* Scrollable header strip */
+	.chat-page__header {
+		padding: 0 1ch;
+		height: 1lh;
+		border-bottom: 1px solid var(--foreground0, var(--webtui-foreground-2));
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		gap: 1ch;
+	}
 
-  .chat-page__title {
-    margin: 0;
-    font-size: 1em;
-    font-weight: bold;
-    color: var(--foreground0, var(--webtui-foreground-0));
-  }
+	.chat-page__title {
+		margin: 0;
+		font-size: 1em;
+		font-weight: bold;
+		color: var(--foreground0, var(--webtui-foreground-0));
+	}
 
-  /* Main content row: chat column + sidebar */
-  .chat-page__body {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-    min-height: 0;
-    overflow: hidden;
-  }
+	/* Main content row: chat column + sidebar */
+	.chat-page__body {
+		display: flex;
+		flex-direction: row;
+		flex: 1;
+		min-height: 0;
+		overflow: hidden;
+	}
 
-  /* Chat column */
-  .chat-page__main {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-width: 0;
-    min-height: 0;
-    overflow: hidden;
-  }
+	/* Chat column */
+	.chat-page__main {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		min-width: 0;
+		min-height: 0;
+		overflow: hidden;
+	}
 }

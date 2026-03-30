@@ -21,25 +21,25 @@
 @import "@webtui/css/components/badge.css";
 
 @layer base {
-  html,
-  body {
-    height: 100%;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-  }
+	html,
+	body {
+		height: 100%;
+		overflow: hidden;
+		margin: 0;
+		padding: 0;
+	}
 
-  .app-shell {
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
+	.app-shell {
+		height: 100dvh;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
 
-  .app-shell-main {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-  }
+	.app-shell-main {
+		flex: 1;
+		min-height: 0;
+		display: flex;
+		flex-direction: column;
+	}
 }

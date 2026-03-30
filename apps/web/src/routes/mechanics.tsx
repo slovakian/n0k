@@ -59,7 +59,13 @@ dF/dt = -γ · T
 
 			{/* Section 2: Variables */}
 			<Section title="The Variables">
-				<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+				<div
+					style={{
+						display: "grid",
+						gridTemplateColumns: "1fr 1fr",
+						gap: "1.5rem",
+					}}
+				>
 					<Variable
 						symbol="T"
 						name="Temperature"
@@ -99,13 +105,50 @@ dF/dt = -γ · T
 					As temperature changes, your room's status shifts. Each tier indicates
 					urgency and visual prominence:
 				</p>
-				<div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginTop: "1rem" }}>
-					<StatusTier status="INFERNO" temp="T > 400K" color="#ff0000" desc="Wildfire. Burning fuel fast." />
-					<StatusTier status="HOT" temp="300K — 400K" color="#ff6600" desc="Very active. Sustained conversation." />
-					<StatusTier status="ACTIVE" temp="150K — 300K" color="#00ff00" desc="Healthy. Room is alive and stable." />
-					<StatusTier status="COOLING" temp="50K — 150K" color="#ffff00" desc="Activity dropping. Fuel burning slower." />
-					<StatusTier status="CRITICAL" temp="T_death — 50K" color="#ff0000" desc="Near death. Minutes remaining." />
-					<StatusTier status="DEAD" temp="T ≤ T_death" color="#333333" desc="Archived forever. Game over." />
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						gap: "0.75rem",
+						marginTop: "1rem",
+					}}
+				>
+					<StatusTier
+						status="INFERNO"
+						temp="T > 400K"
+						color="#ff0000"
+						desc="Wildfire. Burning fuel fast."
+					/>
+					<StatusTier
+						status="HOT"
+						temp="300K — 400K"
+						color="#ff6600"
+						desc="Very active. Sustained conversation."
+					/>
+					<StatusTier
+						status="ACTIVE"
+						temp="150K — 300K"
+						color="#00ff00"
+						desc="Healthy. Room is alive and stable."
+					/>
+					<StatusTier
+						status="COOLING"
+						temp="50K — 150K"
+						color="#ffff00"
+						desc="Activity dropping. Fuel burning slower."
+					/>
+					<StatusTier
+						status="CRITICAL"
+						temp="T_death — 50K"
+						color="#ff0000"
+						desc="Near death. Minutes remaining."
+					/>
+					<StatusTier
+						status="DEAD"
+						temp="T ≤ T_death"
+						color="#333333"
+						desc="Archived forever. Game over."
+					/>
 				</div>
 			</Section>
 
@@ -119,7 +162,9 @@ dF/dt = -γ · T
 					<strong>Key mechanics:</strong>
 					<ul style={{ marginTop: "0.5rem" }}>
 						<li>Starts at 100 FU per new room</li>
-						<li>No upper cap — you can inject more via platform tokens (paid)</li>
+						<li>
+							No upper cap — you can inject more via platform tokens (paid)
+						</li>
 						<li>Burn rate = γ · T (hotter rooms burn faster)</li>
 						<li>
 							Display shows: current FU, drain rate (FU/hr), time to death at
@@ -136,9 +181,10 @@ dF/dt = -γ · T
 			{/* Section 5: Grace Period */}
 			<Section title="Cold-Start Grace Period">
 				<p>
-					When you create a room, it enters a <strong>one-time grace period</strong>{" "}
-					(3–5 minutes). During this time, cooling is frozen — temperature stays
-					locked and you have time to gather initial participants.
+					When you create a room, it enters a{" "}
+					<strong>one-time grace period</strong> (3–5 minutes). During this
+					time, cooling is frozen — temperature stays locked and you have time
+					to gather initial participants.
 				</p>
 				<HighlightBox>
 					<strong>Grace period ends when:</strong>
@@ -192,7 +238,9 @@ where P_norm(t) ∈ [0, 1] is normalized platform pulse
 					</CodeBox>
 					<p style={{ marginTop: "0.75rem" }}>
 						<strong>Display:</strong> Always visible in the main layout.{" "}
-						<code>Platform Pulse: 847 msg/min · Cooling: 1.4× · 62 live rooms</code>
+						<code>
+							Platform Pulse: 847 msg/min · Cooling: 1.4× · 62 live rooms
+						</code>
 					</p>
 				</HighlightBox>
 			</Section>
@@ -200,14 +248,15 @@ where P_norm(t) ∈ [0, 1] is normalized platform pulse
 			{/* Section 8: Milestone Fuel Injection */}
 			<Section title="Milestone Rewards: Collective Fuel Bonuses">
 				<p>
-					Rooms with diverse, sustained participation get surprise fuel injections.
-					This rewards real conversation over bot spam.
+					Rooms with diverse, sustained participation get surprise fuel
+					injections. This rewards real conversation over bot spam.
 				</p>
 				<HighlightBox>
 					<strong>Milestones fire when ALL three conditions are met:</strong>
 					<ol style={{ marginTop: "0.5rem" }}>
 						<li>
-							At least N distinct users have sent ≥1 message (e.g., N=10, 25, 50)
+							At least N distinct users have sent ≥1 message (e.g., N=10, 25,
+							50)
 						</li>
 						<li>
 							No single user accounts for more than X% of total messages (e.g.,
@@ -219,8 +268,8 @@ where P_norm(t) ∈ [0, 1] is normalized platform pulse
 						</li>
 					</ol>
 					<p style={{ marginTop: "0.75rem" }}>
-						<strong>Rewards:</strong> +5 FU (10 users), +10 FU (25 users), +15 FU
-						(50 users)
+						<strong>Rewards:</strong> +5 FU (10 users), +10 FU (25 users), +15
+						FU (50 users)
 					</p>
 				</HighlightBox>
 			</Section>
@@ -320,7 +369,13 @@ where P_norm(t) ∈ [0, 1] is normalized platform pulse
 	);
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+	title,
+	children,
+}: {
+	title: string;
+	children: React.ReactNode;
+}) {
 	return (
 		<section style={{ marginBottom: "2.5rem" }}>
 			<h2
@@ -396,10 +451,14 @@ function Variable({
 			<div style={{ color: "#00ff00", fontWeight: "bold", fontSize: "1.1rem" }}>
 				{symbol}
 			</div>
-			<div style={{ color: "#00ff00", fontSize: "0.9rem", marginTop: "0.25rem" }}>
+			<div
+				style={{ color: "#00ff00", fontSize: "0.9rem", marginTop: "0.25rem" }}
+			>
 				{name}
 			</div>
-			<div style={{ color: "#888888", fontSize: "0.85rem", marginTop: "0.5rem" }}>
+			<div
+				style={{ color: "#888888", fontSize: "0.85rem", marginTop: "0.5rem" }}
+			>
 				{desc}
 			</div>
 		</div>
@@ -439,9 +498,18 @@ function StatusTier({
 			/>
 			<div style={{ flex: 1 }}>
 				<div style={{ color: color, fontWeight: "bold" }}>
-					{status} <span style={{ color: "#666666", fontWeight: "normal" }}>({temp})</span>
+					{status}{" "}
+					<span style={{ color: "#666666", fontWeight: "normal" }}>
+						({temp})
+					</span>
 				</div>
-				<div style={{ color: "#888888", fontSize: "0.85rem", marginTop: "0.25rem" }}>
+				<div
+					style={{
+						color: "#888888",
+						fontSize: "0.85rem",
+						marginTop: "0.25rem",
+					}}
+				>
 					{desc}
 				</div>
 			</div>
@@ -467,7 +535,9 @@ function ExampleCurve({
 			}}
 		>
 			<div style={{ color: "#00ff00", fontWeight: "bold" }}>{title}</div>
-			<div style={{ color: "#888888", fontSize: "0.85rem", marginTop: "0.25rem" }}>
+			<div
+				style={{ color: "#888888", fontSize: "0.85rem", marginTop: "0.25rem" }}
+			>
 				{desc}
 			</div>
 			<div

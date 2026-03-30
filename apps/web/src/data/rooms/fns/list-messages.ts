@@ -4,10 +4,7 @@ import type { StoredMessage } from "@/cloudflare/types";
 
 export const listRoomMessages = createServerFn({ method: "GET" })
 	.inputValidator(
-		(data: {
-			filters?: SimpleComparison[];
-			sorts?: ParsedOrderBy[];
-		}) => data,
+		(data: { filters?: SimpleComparison[]; sorts?: ParsedOrderBy[] }) => data,
 	)
 	.handler(async ({ data: { filters, sorts: _sorts } }) => {
 		const roomId = filters?.find(

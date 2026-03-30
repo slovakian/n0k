@@ -1,22 +1,22 @@
 @layer base, utils, components;
 
-@import '@webtui/css/base.css';
-@import '@webtui/css/components/view.css';
-@import '@webtui/css/utils/box.css';
+@import "@webtui/css/base.css";
+@import "@webtui/css/components/view.css";
+@import "@webtui/css/utils/box.css";
 
 @layer components {
-  .chat-layout {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-  }
+	.chat-layout {
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+		width: 100vw;
+		overflow: hidden;
+	}
 
-  .chat-layout__container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-  }
+	.chat-layout__container {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		width: 100%;
+	}
 }

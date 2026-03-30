@@ -1,5 +1,5 @@
 import { createDb } from "@n0k/db";
-import type { SimpleComparison, ParsedOrderBy } from "@tanstack/react-db";
+import type { ParsedOrderBy, SimpleComparison } from "@tanstack/react-db";
 import { createServerFn } from "@tanstack/react-start";
 import type { StoredMessage } from "@/cloudflare/types";
 
