@@ -10,7 +10,9 @@
 	"dependencies": {
 		"@libsql/client": "catalog:",
 		"@n0k/auth": "workspace:*",
+		"@n0k/db": "workspace:*",
 		"@n0k/env": "workspace:*",
+		"@tanstack/query-db-collection": "^1.0.32",
 		"@tanstack/react-db": "^0.1.79",
 		"@tanstack/react-form": "^1.28.0",
 		"@tanstack/react-query": "^5.80.6",

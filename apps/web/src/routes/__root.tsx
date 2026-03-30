@@ -5,7 +5,7 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { useThemeStore } from "../Features/theme-store";
+import { useThemeStore } from "../features/theme-store";
 
 import appCss from "../index.css?url";
 

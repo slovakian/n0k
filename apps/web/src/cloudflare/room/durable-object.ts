@@ -1,7 +1,9 @@
 import { DurableObject } from "cloudflare:workers";
-import type { ClientMessage, ServerMessage, StoredMessage } from "./types";
+import type { env as cfEnv } from "@n0k/env/web/server";
+import type { ClientMessage, ServerMessage, StoredMessage } from "../types";
 
 export class ChatRoom extends DurableObject {
+	declare env: typeof cfEnv;
 	private messages: StoredMessage[] = [];
 
 	async fetch(request: Request): Promise<Response> {
@@ -28,8 +30,7 @@ export class ChatRoom extends DurableObject {
 		_ws: WebSocket,
 		raw: string | ArrayBuffer,
 	): Promise<void> {
-		const text =
-			typeof raw === "string" ? raw : new TextDecoder().decode(raw);
+		const text = typeof raw === "string" ? raw : new TextDecoder().decode(raw);
 
 		let payload: ClientMessage;
 		try {

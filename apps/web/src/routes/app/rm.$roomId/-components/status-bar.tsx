@@ -1,5 +1,5 @@
-import { useThemeStore } from "../../../../Features/theme-store";
-import { THEMES } from "../../../../Features/themes";
+import { useThemeStore } from "../../../../features/theme-store";
+import { THEMES } from "../../../../features/themes";
 import "./status-bar.css";
 
 // Mock global platform state — wired to real data later
