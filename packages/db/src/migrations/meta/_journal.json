@@ -15,6 +15,13 @@
       "when": 1774833499011,
       "tag": "0001_icy_viper",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1774846762984,
+      "tag": "0002_amazing_wolverine",
+      "breakpoints": true
     }
   ]
 }

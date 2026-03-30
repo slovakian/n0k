@@ -1,10 +1,18 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { authClient } from "@/lib/auth-client";
 
 export const Route = createFileRoute("/")({
 	component: Homepage,
 });
 
 function Homepage() {
+	const navigate = useNavigate();
+
+	async function handleLogin() {
+		await authClient.signIn.anonymous();
+		navigate({ to: "/app" });
+	}
+
 	return (
 		<main
 			style={{
@@ -90,7 +98,7 @@ function Homepage() {
 					<Feature icon="⚡" label="Real-time" />
 					<Feature icon="⏱️" label="Ephemeral" />
 					<Feature icon="🔌" label="Live" />
-					<Feature icon="💬" label="Decentralized" />
+					<Feature icon="💬" label="Anonymous" />
 				</div>
 
 				{/* Separator */}
@@ -111,32 +119,30 @@ function Homepage() {
 						flexWrap: "wrap",
 					}}
 				>
-					<Link to="/app">
-						<button
-							type="button"
-							is-="button"
-							style={{
-								backgroundColor: "#00ff00",
-								color: "#000000",
-								padding: "0.75rem 1.5rem",
-								border: "none",
-								fontFamily: "monospace",
-								fontWeight: "bold",
-								cursor: "pointer",
-								fontSize: "0.95rem",
-								transition: "all 0.2s",
-							}}
-							onMouseEnter={(e) => {
-								e.currentTarget.style.boxShadow =
-									"0 0 15px rgba(0, 255, 0, 0.6)";
-							}}
-							onMouseLeave={(e) => {
-								e.currentTarget.style.boxShadow = "none";
-							}}
-						>
-							→ Enter
-						</button>
-					</Link>
+					<button
+						type="button"
+						is-="button"
+						onClick={handleLogin}
+						style={{
+							backgroundColor: "#00ff00",
+							color: "#000000",
+							padding: "0.75rem 1.5rem",
+							border: "none",
+							fontFamily: "monospace",
+							fontWeight: "bold",
+							cursor: "pointer",
+							fontSize: "0.95rem",
+							transition: "all 0.2s",
+						}}
+						onMouseEnter={(e) => {
+							e.currentTarget.style.boxShadow = "0 0 15px rgba(0, 255, 0, 0.6)";
+						}}
+						onMouseLeave={(e) => {
+							e.currentTarget.style.boxShadow = "none";
+						}}
+					>
+						→ login
+					</button>
 					<Link to="/mechanics">
 						<button
 							type="button"
@@ -180,6 +186,17 @@ function Homepage() {
 				</p>
 				<p style={{ margin: "0.5rem 0", color: "#333333" }}>
 					$ terminal chat rooms for the ephemeral age
+				</p>
+				<p style={{ margin: "0.5rem 0", color: "#444444" }}>
+					made by{" "}
+					<a
+						href="https://procka.org"
+						target="_blank"
+						rel="noopener noreferrer"
+						style={{ color: "#555555", textDecoration: "underline" }}
+					>
+						Jason Procka (procka.org)
+					</a>
 				</p>
 			</div>
 		</main>

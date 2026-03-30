@@ -53,7 +53,9 @@ export const webWorker = await TanStackStart("web", {
 				? Worker.DevUrl
 				: "http://localhost:3001",
 		BETTER_AUTH_SECRET:
-			isProduction || isPr ? alchemy.secret.env.BETTER_AUTH_SECRET! : "secret",
+			isProduction || isPr
+				? alchemy.secret.env.BETTER_AUTH_SECRET!
+				: "L3+qW4yNqfrRIxph0Lmwy0kdiNEsFPw+2JGXun3babA=",
 	},
 });
 
