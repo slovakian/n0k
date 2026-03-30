@@ -1,3 +1,4 @@
+import type { QueryClient } from "@tanstack/react-query";
 import {
 	createRootRouteWithContext,
 	HeadContent,
@@ -5,12 +6,13 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { authQueryOptions } from "@/features/auth/query";
 import { useThemeStore } from "../features/theme-store";
-
 import appCss from "../index.css?url";
 
-// biome-ignore lint/complexity/noBannedTypes: Temporary empty context
-export type RouterAppContext = {};
+export type RouterAppContext = {
+	queryClient: QueryClient;
+};
 
 export const Route = createRootRouteWithContext<RouterAppContext>()({
 	head: () => ({
@@ -33,6 +35,10 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 			},
 		],
 	}),
+	loader: async ({ context }) => {
+		const session = await context.queryClient.ensureQueryData(authQueryOptions);
+		return { session };
+	},
 
 	component: RootDocument,
 });
