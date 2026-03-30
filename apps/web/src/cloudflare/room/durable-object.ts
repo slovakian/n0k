@@ -1,8 +1,8 @@
 import { DurableObject } from "cloudflare:workers";
 import type { env as cfEnv } from "@n0k/env/web/server";
 import type { ClientMessage, ServerMessage, StoredMessage } from "../types";
-import { createRoomDb, messages, runMigrations } from "./db";
 import type { RoomDb } from "./db";
+import { createRoomDb, messages, runMigrations } from "./db";
 
 export class ChatRoom extends DurableObject {
 	declare env: typeof cfEnv;
