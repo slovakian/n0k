@@ -1,10 +1,20 @@
 import { DurableObject } from "cloudflare:workers";
 import type { env as cfEnv } from "@n0k/env/web/server";
 import type { ClientMessage, ServerMessage, StoredMessage } from "../types";
+import { createRoomDb, messages, runMigrations } from "./db";
+import type { RoomDb } from "./db";
 
 export class ChatRoom extends DurableObject {
 	declare env: typeof cfEnv;
-	private messages: StoredMessage[] = [];
+	private db: RoomDb;
+
+	constructor(ctx: DurableObjectState, env: typeof cfEnv) {
+		super(ctx, env);
+		this.db = createRoomDb(ctx.storage);
+		ctx.blockConcurrencyWhile(async () => {
+			await runMigrations(this.db);
+		});
+	}
 
 	async fetch(request: Request): Promise<Response> {
 		if (request.headers.get("Upgrade")?.toLowerCase() !== "websocket") {
@@ -16,10 +26,20 @@ export class ChatRoom extends DurableObject {
 
 		this.ctx.acceptWebSocket(server);
 
+		const history = await this.db
+			.select({
+				id: messages.id,
+				author: messages.author,
+				content: messages.content,
+				timestamp: messages.timestamp,
+				msgType: messages.msgType,
+			})
+			.from(messages);
+
 		server.send(
 			JSON.stringify({
 				type: "history",
-				messages: this.messages,
+				messages: history,
 			} satisfies ServerMessage),
 		);
 
@@ -41,6 +61,8 @@ export class ChatRoom extends DurableObject {
 
 		if (payload.type !== "message") return;
 
+		const roomId = this.ctx.id.name ?? this.ctx.id.toString();
+
 		const stored: StoredMessage = {
 			id: crypto.randomUUID(),
 			author: payload.author,
@@ -49,7 +71,7 @@ export class ChatRoom extends DurableObject {
 			msgType: "user",
 		};
 
-		this.messages.push(stored);
+		await this.db.insert(messages).values({ ...stored, roomId });
 
 		const broadcast = JSON.stringify({
 			type: "message",

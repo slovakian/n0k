@@ -31,7 +31,10 @@ const db = await D1Database("database", {
 	migrationsDir: "../../packages/db/src/migrations",
 });
 
-const chatRoom = DurableObjectNamespace("chat-room", { className: "ChatRoom" });
+const chatRoom = DurableObjectNamespace("chat-room", {
+	className: "ChatRoom",
+	sqlite: true,
+});
 
 export const webWorker = await TanStackStart("web", {
 	domains: isProduction ? ["n0k.org"] : undefined,
