@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { authQueryOptions } from "@/features/auth/query";
-import { useThemeStore } from "../features/theme-store";
+import { useThemeStore } from "@/features/themes/store";
 import appCss from "../index.css?url";
 
 export type RouterAppContext = {

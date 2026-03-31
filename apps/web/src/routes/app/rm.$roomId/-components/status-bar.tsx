@@ -1,4 +1,4 @@
-import { useThemeStore } from "../../../../features/theme-store";
+import { useThemeStore } from "@/features/themes/store";
 import { THEMES } from "../../../../features/themes";
 import "./status-bar.css";
 

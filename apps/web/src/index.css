@@ -19,6 +19,7 @@
 @import "@webtui/css/components/separator.css";
 @import "@webtui/css/components/spinner.css";
 @import "@webtui/css/components/badge.css";
+@import "@webtui/css/components/dialog.css";
 
 @layer base {
 	html,

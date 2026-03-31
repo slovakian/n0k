@@ -3,10 +3,8 @@ import {
 	queryCollectionOptions,
 } from "@tanstack/query-db-collection";
 import { createCollection } from "@tanstack/react-db";
-import { QueryClient } from "@tanstack/react-query";
+import { queryClient } from "@/lib/query";
 import { listAllRooms, listRoomMessages } from "./fns";
-
-const queryClient = new QueryClient();
 
 // ─── Rooms ────────────────────────────────────────────────────────────────────
 // Eager: small dataset, load all rooms up front.

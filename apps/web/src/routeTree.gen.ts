@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as AppRmRoomIdRouteRouteImport } from './routes/app/rm.$roomId/route'
+import { Route as AppRmCreateIndexRouteImport } from './routes/app/rm.create/index'
 import { Route as AppRmRoomIdIndexRouteImport } from './routes/app/rm.$roomId/index'
 import { Route as ApiRoomRoomIdWsRouteImport } from './routes/api/room/$roomId/ws'
 
@@ -48,6 +49,11 @@ const AppRmRoomIdRouteRoute = AppRmRoomIdRouteRouteImport.update({
   path: '/rm/$roomId',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppRmCreateIndexRoute = AppRmCreateIndexRouteImport.update({
+  id: '/rm/create/',
+  path: '/rm/create/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const AppRmRoomIdIndexRoute = AppRmRoomIdIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -68,6 +74,7 @@ export interface FileRoutesByFullPath {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/room/$roomId/ws': typeof ApiRoomRoomIdWsRoute
   '/app/rm/$roomId/': typeof AppRmRoomIdIndexRoute
+  '/app/rm/create/': typeof AppRmCreateIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/room/$roomId/ws': typeof ApiRoomRoomIdWsRoute
   '/app/rm/$roomId': typeof AppRmRoomIdIndexRoute
+  '/app/rm/create': typeof AppRmCreateIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/room/$roomId/ws': typeof ApiRoomRoomIdWsRoute
   '/app/rm/$roomId/': typeof AppRmRoomIdIndexRoute
+  '/app/rm/create/': typeof AppRmCreateIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/api/room/$roomId/ws'
     | '/app/rm/$roomId/'
+    | '/app/rm/create/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/api/room/$roomId/ws'
     | '/app/rm/$roomId'
+    | '/app/rm/create'
   id:
     | '__root__'
     | '/'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/api/room/$roomId/ws'
     | '/app/rm/$roomId/'
+    | '/app/rm/create/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRmRoomIdRouteRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/app/rm/create/': {
+      id: '/app/rm/create/'
+      path: '/rm/create'
+      fullPath: '/app/rm/create/'
+      preLoaderRoute: typeof AppRmCreateIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/app/rm/$roomId/': {
       id: '/app/rm/$roomId/'
       path: '/'
@@ -202,11 +221,13 @@ const AppRmRoomIdRouteRouteWithChildren =
 interface AppRouteRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
   AppRmRoomIdRouteRoute: typeof AppRmRoomIdRouteRouteWithChildren
+  AppRmCreateIndexRoute: typeof AppRmCreateIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
   AppRmRoomIdRouteRoute: AppRmRoomIdRouteRouteWithChildren,
+  AppRmCreateIndexRoute: AppRmCreateIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(

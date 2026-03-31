@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { DEFAULT_THEME } from "./themes";
+import { DEFAULT_THEME } from ".";
 
 interface ThemeStore {
 	theme: string;

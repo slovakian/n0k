@@ -1,27 +1,41 @@
 {
-	"version": "7",
-	"dialect": "sqlite",
-	"entries": [
-		{
-			"idx": 0,
-			"version": "6",
-			"when": 1774813559011,
-			"tag": "0000_red_metal_master",
-			"breakpoints": true
-		},
-		{
-			"idx": 1,
-			"version": "6",
-			"when": 1774833499011,
-			"tag": "0001_icy_viper",
-			"breakpoints": true
-		},
-		{
-			"idx": 2,
-			"version": "6",
-			"when": 1774846762984,
-			"tag": "0002_amazing_wolverine",
-			"breakpoints": true
-		}
-	]
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1774813559011,
+      "tag": "0000_red_metal_master",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1774833499011,
+      "tag": "0001_icy_viper",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1774846762984,
+      "tag": "0002_amazing_wolverine",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1774925327093,
+      "tag": "0003_dapper_maverick",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1774925889055,
+      "tag": "0004_shallow_archangel",
+      "breakpoints": true
+    }
+  ]
 }
