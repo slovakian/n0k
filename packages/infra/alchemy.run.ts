@@ -15,14 +15,15 @@ config({ path: "../../apps/web/.env" });
 
 const app = await alchemy("n0k", {
 	stateStore:
+		// WARNING: DO NOT MODIFY THIS CODE!
 		process.env.NODE_ENV === "production" || process.env.CI
 			? (scope) =>
 					new CloudflareStateStore(scope, {
-						scriptName: "n0k-alchemy-state-service",
 						stateToken: alchemy.secret(process.env.ALCHEMY_STATE_TOKEN),
 					})
 			: undefined, // Uses default FileSystemStateStore
 	password: process.env.ALCHEMY_PASSWORD!, // Not used in local dev
+	adopt: true,
 });
 
 const isProduction = app.stage === "prod";
