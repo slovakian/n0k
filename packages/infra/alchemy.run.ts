@@ -35,7 +35,7 @@ const chatRoom = DurableObjectNamespace("chat-room", {
 	className: "ChatRoom",
 	sqlite: true,
 });
-
+//misc
 export const webWorker = await TanStackStart("web", {
 	domains: isProduction ? ["n0k.org"] : undefined,
 	cwd: "../../apps/web",
