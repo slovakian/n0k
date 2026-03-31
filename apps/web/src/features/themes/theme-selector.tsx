@@ -1,10 +1,9 @@
 import { THEMES } from "./index";
-import { useThemeStore } from "./store";
+import { useTheme, setTheme } from "./use-theme";
 import "./theme-selector.css";
 
 export function ThemeSelector() {
-	const theme = useThemeStore((s) => s.theme);
-	const setTheme = useThemeStore((s) => s.setTheme);
+	const theme = useTheme();
 	const currentIndex = THEMES.findIndex((t) => t.id === theme);
 
 	const cyclePrev = () => {
