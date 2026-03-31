@@ -37,6 +37,7 @@ const chatRoom = DurableObjectNamespace("chat-room", {
 });
 //misc
 export const webWorker = await TanStackStart("web", {
+	adopt: true,
 	domains: isProduction ? ["n0k.org"] : undefined,
 	cwd: "../../apps/web",
 	bindings: {
