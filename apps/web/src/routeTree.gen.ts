@@ -12,10 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as MechanicsRouteImport } from './routes/mechanics'
 import { Route as AppRouteRouteImport } from './routes/app/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as AppRmRoomIdRouteRouteImport } from './routes/app/rm.$roomId/route'
-import { Route as AppRmCreateIndexRouteImport } from './routes/app/rm.create/index'
 import { Route as AppRmRoomIdIndexRouteImport } from './routes/app/rm.$roomId/index'
 import { Route as ApiRoomRoomIdWsRouteImport } from './routes/api/room/$roomId/ws'
 
@@ -34,11 +32,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppIndexRoute = AppIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AppRouteRoute,
-} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -47,11 +40,6 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 const AppRmRoomIdRouteRoute = AppRmRoomIdRouteRouteImport.update({
   id: '/rm/$roomId',
   path: '/rm/$roomId',
-  getParentRoute: () => AppRouteRoute,
-} as any)
-const AppRmCreateIndexRoute = AppRmCreateIndexRouteImport.update({
-  id: '/rm/create/',
-  path: '/rm/create/',
   getParentRoute: () => AppRouteRoute,
 } as any)
 const AppRmRoomIdIndexRoute = AppRmRoomIdIndexRouteImport.update({
@@ -69,33 +57,28 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
   '/mechanics': typeof MechanicsRoute
-  '/app/': typeof AppIndexRoute
   '/app/rm/$roomId': typeof AppRmRoomIdRouteRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/room/$roomId/ws': typeof ApiRoomRoomIdWsRoute
   '/app/rm/$roomId/': typeof AppRmRoomIdIndexRoute
-  '/app/rm/create/': typeof AppRmCreateIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteRouteWithChildren
   '/mechanics': typeof MechanicsRoute
-  '/app': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/room/$roomId/ws': typeof ApiRoomRoomIdWsRoute
   '/app/rm/$roomId': typeof AppRmRoomIdIndexRoute
-  '/app/rm/create': typeof AppRmCreateIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
   '/mechanics': typeof MechanicsRoute
-  '/app/': typeof AppIndexRoute
   '/app/rm/$roomId': typeof AppRmRoomIdRouteRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/room/$roomId/ws': typeof ApiRoomRoomIdWsRoute
   '/app/rm/$roomId/': typeof AppRmRoomIdIndexRoute
-  '/app/rm/create/': typeof AppRmCreateIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -103,32 +86,27 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/mechanics'
-    | '/app/'
     | '/app/rm/$roomId'
     | '/api/auth/$'
     | '/api/room/$roomId/ws'
     | '/app/rm/$roomId/'
-    | '/app/rm/create/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/mechanics'
     | '/app'
+    | '/mechanics'
     | '/api/auth/$'
     | '/api/room/$roomId/ws'
     | '/app/rm/$roomId'
-    | '/app/rm/create'
   id:
     | '__root__'
     | '/'
     | '/app'
     | '/mechanics'
-    | '/app/'
     | '/app/rm/$roomId'
     | '/api/auth/$'
     | '/api/room/$roomId/ws'
     | '/app/rm/$roomId/'
-    | '/app/rm/create/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -162,13 +140,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/app/': {
-      id: '/app/'
-      path: '/'
-      fullPath: '/app/'
-      preLoaderRoute: typeof AppIndexRouteImport
-      parentRoute: typeof AppRouteRoute
-    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -181,13 +152,6 @@ declare module '@tanstack/react-router' {
       path: '/rm/$roomId'
       fullPath: '/app/rm/$roomId'
       preLoaderRoute: typeof AppRmRoomIdRouteRouteImport
-      parentRoute: typeof AppRouteRoute
-    }
-    '/app/rm/create/': {
-      id: '/app/rm/create/'
-      path: '/rm/create'
-      fullPath: '/app/rm/create/'
-      preLoaderRoute: typeof AppRmCreateIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
     '/app/rm/$roomId/': {
@@ -219,15 +183,11 @@ const AppRmRoomIdRouteRouteWithChildren =
   AppRmRoomIdRouteRoute._addFileChildren(AppRmRoomIdRouteRouteChildren)
 
 interface AppRouteRouteChildren {
-  AppIndexRoute: typeof AppIndexRoute
   AppRmRoomIdRouteRoute: typeof AppRmRoomIdRouteRouteWithChildren
-  AppRmCreateIndexRoute: typeof AppRmCreateIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
-  AppIndexRoute: AppIndexRoute,
   AppRmRoomIdRouteRoute: AppRmRoomIdRouteRouteWithChildren,
-  AppRmCreateIndexRoute: AppRmCreateIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(

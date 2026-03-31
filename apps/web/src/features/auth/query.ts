@@ -14,4 +14,6 @@ export const authQueryOptions = queryOptions({
 });
 
 export const useAuth = () => useQuery(authQueryOptions);
+/** Same query as `useAuth` — session from `authClient.getSession()`. */
+export const useSession = useAuth;
 export const useSuspenseAuth = () => useSuspenseQuery(authQueryOptions);

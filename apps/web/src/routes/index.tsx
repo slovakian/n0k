@@ -263,7 +263,9 @@ const CreateRoomDialog = forwardRef<
 		setLoading(true);
 		try {
 			await authClient.signIn.anonymous();
-			const { id } = await createRoom({ data: { name, description: description || undefined } });
+			const { id } = await createRoom({
+				data: { name, description: description || undefined },
+			});
 			setName("");
 			setDescription("");
 			onCreated(id);
@@ -292,13 +294,21 @@ const CreateRoomDialog = forwardRef<
 				<div style={{ marginBottom: "1rem" }}>
 					<strong style={{ color: "#00ff00" }}>$ new room</strong>
 				</div>
-				<p style={{ margin: "0 0 1rem 0", color: "#aaaaaa", fontSize: "0.9rem" }}>
-					Give your room a name. Letters, numbers, hyphens, and underscores only.
+				<p
+					style={{ margin: "0 0 1rem 0", color: "#aaaaaa", fontSize: "0.9rem" }}
+				>
+					Give your room a name. Letters, numbers, hyphens, and underscores
+					only.
 				</p>
 				<div style={{ marginBottom: "1rem" }}>
 					<label
 						htmlFor="room-name"
-						style={{ display: "block", marginBottom: "0.4rem", color: "#aaaaaa", fontSize: "0.85rem" }}
+						style={{
+							display: "block",
+							marginBottom: "0.4rem",
+							color: "#aaaaaa",
+							fontSize: "0.85rem",
+						}}
 					>
 						room name
 					</label>
@@ -313,7 +323,13 @@ const CreateRoomDialog = forwardRef<
 						style={{ width: "100%", boxSizing: "border-box" }}
 					/>
 					{error && (
-						<p style={{ margin: "0.4rem 0 0 0", color: "#ff4444", fontSize: "0.85rem" }}>
+						<p
+							style={{
+								margin: "0.4rem 0 0 0",
+								color: "#ff4444",
+								fontSize: "0.85rem",
+							}}
+						>
 							{error}
 						</p>
 					)}
@@ -321,7 +337,12 @@ const CreateRoomDialog = forwardRef<
 				<div style={{ marginBottom: "1rem" }}>
 					<label
 						htmlFor="room-description"
-						style={{ display: "block", marginBottom: "0.4rem", color: "#aaaaaa", fontSize: "0.85rem" }}
+						style={{
+							display: "block",
+							marginBottom: "0.4rem",
+							color: "#aaaaaa",
+							fontSize: "0.85rem",
+						}}
 					>
 						description <span style={{ color: "#555" }}>(optional)</span>
 					</label>
@@ -333,13 +354,30 @@ const CreateRoomDialog = forwardRef<
 						onChange={(e) => setDescription(e.target.value)}
 						rows={3}
 						maxLength={280}
-						style={{ width: "100%", boxSizing: "border-box", resize: "vertical" }}
+						style={{
+							width: "100%",
+							boxSizing: "border-box",
+							resize: "vertical",
+						}}
 					/>
-					<p style={{ margin: "0.25rem 0 0 0", color: "#555", fontSize: "0.8rem", textAlign: "right" }}>
+					<p
+						style={{
+							margin: "0.25rem 0 0 0",
+							color: "#555",
+							fontSize: "0.8rem",
+							textAlign: "right",
+						}}
+					>
 						{description.length}/280
 					</p>
 				</div>
-				<div style={{ display: "flex", gap: "0.75rem", justifyContent: "flex-end" }}>
+				<div
+					style={{
+						display: "flex",
+						gap: "0.75rem",
+						justifyContent: "flex-end",
+					}}
+				>
 					<button
 						type="button"
 						is-="button"
@@ -361,7 +399,12 @@ const CreateRoomDialog = forwardRef<
 						}}
 					>
 						{loading ? (
-							<span is-="spinner" variant-="dots" speed-="medium" style={{ color: "#000" }} />
+							<span
+								is-="spinner"
+								variant-="dots"
+								speed-="medium"
+								style={{ color: "#000" }}
+							/>
 						) : (
 							"create"
 						)}

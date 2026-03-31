@@ -8,9 +8,12 @@ export interface ChatMessage {
 	type: "user" | "system";
 }
 
+type NewChatMessage = Pick<ChatMessage, "author" | "content" | "type"> &
+	Partial<Pick<ChatMessage, "id" | "timestamp">>;
+
 interface ChatStore {
 	messages: ChatMessage[];
-	addMessage: (message: Omit<ChatMessage, "id" | "timestamp">) => void;
+	addMessage: (message: NewChatMessage) => void;
 	clearMessages: () => void;
 	setMessages: (messages: ChatMessage[]) => void;
 }
@@ -22,9 +25,11 @@ export const useChatStore = create<ChatStore>((set) => ({
 			messages: [
 				...state.messages,
 				{
-					...message,
-					id: crypto.randomUUID(),
-					timestamp: Date.now(),
+					author: message.author,
+					content: message.content,
+					type: message.type,
+					id: message.id ?? crypto.randomUUID(),
+					timestamp: message.timestamp ?? Date.now(),
 				},
 			],
 		})),

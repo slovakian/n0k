@@ -1,6 +1,7 @@
 import { useLiveQuery } from "@tanstack/react-db";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { roomsCollection } from "@/data/rooms/collections";
+import { useSession } from "@/features/auth/query";
 import { ChatInput } from "./-components/chat-input";
 import { ChatWindow } from "./-components/chat-window";
 import { RoomSidebar } from "./-components/room-sidebar";
@@ -43,7 +44,21 @@ function RouteComponent() {
 		isReady: roomsReady,
 	} = useLiveQuery((q) => q.from({ room: roomsCollection }), []);
 
-	const currentUser = "user"; // TODO: Get from auth context
+	const { data: session, isPending: sessionPending } = useSession();
+	const user = session?.user as
+		| {
+				displayUsername?: string | null;
+				username?: string | null;
+				name?: string | null;
+		  }
+		| undefined;
+	const currentUser =
+		sessionPending && !session
+			? "…"
+			: (user?.displayUsername?.trim() ||
+					user?.username?.trim() ||
+					user?.name?.trim() ||
+					"guest");
 	const { sendMessage } = useRoomWs(roomId);
 
 	const room = rooms?.find((r) => r.id === roomId);

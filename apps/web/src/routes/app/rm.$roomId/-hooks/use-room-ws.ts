@@ -41,8 +41,10 @@ export function useRoomWs(roomId: string) {
 				setMessages(msg.messages.map(toChat));
 			} else if (msg.type === "message") {
 				addMessage({
+					id: msg.message.id,
 					author: msg.message.author,
 					content: msg.message.content,
+					timestamp: msg.message.timestamp,
 					type: msg.message.msgType,
 				});
 			}
