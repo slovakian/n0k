@@ -1,5 +1,4 @@
-import { useThemeStore } from "@/features/themes/store";
-import { THEMES } from "../../../../features/themes";
+import { ThemeSelector } from "@/features/themes/theme-selector";
 import "./status-bar.css";
 
 // Mock global platform state — wired to real data later
@@ -25,21 +24,6 @@ interface StatusBarProps {
 }
 
 export function StatusBar({ roomTitle }: StatusBarProps) {
-	const theme = useThemeStore((state) => state.theme);
-	const setTheme = useThemeStore((state) => state.setTheme);
-
-	const currentIndex = THEMES.findIndex((t) => t.id === theme);
-
-	const cyclePrev = () => {
-		const prev = (currentIndex - 1 + THEMES.length) % THEMES.length;
-		setTheme(THEMES[prev].id);
-	};
-
-	const cycleNext = () => {
-		const next = (currentIndex + 1) % THEMES.length;
-		setTheme(THEMES[next].id);
-	};
-
 	return (
 		<div className="status-bar">
 			{/* Left: app + room info */}
@@ -72,29 +56,7 @@ export function StatusBar({ roomTitle }: StatusBarProps) {
 					· {MOCK_PLATFORM.liveRooms} live
 				</span>
 				<span className="status-bar__sep">│</span>
-				<div className="status-bar__theme-selector">
-					<button
-						type="button"
-						size-="small"
-						className="status-bar__theme-btn"
-						onClick={cyclePrev}
-						title="Previous theme"
-						aria-label="Previous theme"
-					>
-						‹
-					</button>
-					<span className="status-bar__theme-name">{theme}</span>
-					<button
-						type="button"
-						size-="small"
-						className="status-bar__theme-btn"
-						onClick={cycleNext}
-						title="Next theme"
-						aria-label="Next theme"
-					>
-						›
-					</button>
-				</div>
+				<ThemeSelector />
 			</div>
 		</div>
 	);

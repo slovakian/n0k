@@ -19,11 +19,33 @@
 		gap: 1ch;
 	}
 
+	.chat-page__home {
+		flex-shrink: 0;
+		color: var(--foreground1, var(--webtui-foreground-1));
+		text-decoration: none;
+		font-weight: bold;
+		min-width: 2ch;
+		text-align: center;
+	}
+
+	.chat-page__home:hover {
+		color: var(--foreground0, var(--webtui-foreground-0));
+	}
+
+	.chat-page__home:focus-visible {
+		outline: 2px solid var(--foreground0, var(--webtui-foreground-0));
+		outline-offset: 2px;
+	}
+
 	.chat-page__title {
 		margin: 0;
 		font-size: 1em;
 		font-weight: bold;
 		color: var(--foreground0, var(--webtui-foreground-0));
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	/* Main content row: chat column + sidebar */

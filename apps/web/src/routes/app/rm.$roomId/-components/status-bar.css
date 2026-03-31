@@ -90,47 +90,4 @@
 		color: var(--foreground2, var(--webtui-foreground-2));
 		font-size: 0.9em;
 	}
-
-	/* Theme selector */
-	.status-bar__theme-selector {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 0.25ch;
-	}
-
-	.status-bar__theme-name {
-		color: var(--foreground1, var(--webtui-foreground-1));
-		min-width: 16ch;
-		text-align: center;
-	}
-
-	/*
-   * WebTUI `button.css`: default fill + inverted text; gradient when no size-/box-.
-   * `size-="small"` skips gradient + 3lh, but fill/text colors still clash in a 1lh bar.
-   * Do not use `box-` here — box.css ::before borders mis-size on tiny controls and read as a “box over” the glyph.
-   */
-	.status-bar .status-bar__theme-selector button.status-bar__theme-btn {
-		appearance: none;
-		min-width: 2ch;
-		padding: 0 0.35ch;
-		height: 1lh;
-		margin: 0;
-		border: none;
-		background-color: transparent;
-		background-image: none;
-		color: var(--foreground0, var(--webtui-foreground-0));
-		font-family: inherit;
-		font-size: 1em;
-		line-height: 1;
-		cursor: pointer;
-	}
-
-	.status-bar .status-bar__theme-selector button.status-bar__theme-btn:hover {
-		color: var(--green, var(--gb-green, var(--nord14, #98c379)));
-	}
-
-	.status-bar .status-bar__theme-selector button.status-bar__theme-btn:active {
-		color: var(--foreground1, var(--webtui-foreground-1));
-	}
 }

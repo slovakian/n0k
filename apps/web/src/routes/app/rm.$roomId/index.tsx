@@ -80,6 +80,9 @@ function RouteComponent() {
 	return (
 		<div className="chat-page">
 			<div className="chat-page__header">
+				<Link to="/" className="chat-page__home" aria-label="Home" title="Home">
+					~
+				</Link>
 				<span className="chat-page__title" aria-busy={isLoading || !roomsReady}>
 					{title}
 				</span>

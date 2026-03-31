@@ -1,8 +1,13 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { forwardRef, useRef, useState } from "react";
+import { forwardRef, Suspense, useRef, useState } from "react";
 import { createRoomServerFn } from "@/data/rooms/fns/create";
+import { refreshRoomsCollection } from "@/data/utils";
 import { authClient } from "@/features/auth/client";
+import { ThemeSelector } from "@/features/themes/theme-selector";
+import { HomepageErrorBoundary } from "./-components/homepage-error-boundary";
+import { HomepageRoomsTable } from "./-components/homepage-rooms-table";
+import "./index.css";
 
 export const Route = createFileRoute("/")({
 	component: Homepage,
@@ -22,215 +27,92 @@ function Homepage() {
 	}
 
 	return (
-		<main
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignItems: "center",
-				minHeight: "100dvh",
-				padding: "2rem 1rem",
-				gap: "2rem",
-			}}
-		>
-			{/* ASCII Art Header */}
-			<div style={{ textAlign: "center", fontFamily: "monospace" }}>
-				<pre
-					style={{
-						fontSize: "0.9rem",
-						margin: "0",
-						color: "#00ff00",
-						textShadow: "0 0 10px rgba(0, 255, 0, 0.3)",
-						lineHeight: "1",
-						whiteSpace: "pre",
-					}}
-				>
-					{`
+		<main className="homepage">
+			<div className="homepage__top">
+				<div className="homepage__brand">
+					<h1 className="homepage__title">n0k: anonymous chat rooms</h1>
+					<pre className="homepage__ascii" aria-hidden>
+						{`
     ███╗   ██╗ ██████╗ ██╗  ██╗
     ████╗  ██║██╔═══██╗██║ ██╔╝
     ██╔██╗ ██║██║   ██║█████╔╝
     ██║╚██╗██║██║   ██║██╔═██╗
     ██║ ╚████║╚██████╔╝██║  ██╗
-    ╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝
-					`}
-				</pre>
-			</div>
-
-			{/* Main Content Box */}
-			<div
-				box-="square"
-				style={{
-					maxWidth: "600px",
-					width: "100%",
-					padding: "2rem",
-					border: "2px solid #00ff00",
-					backgroundColor: "rgba(0, 255, 0, 0.02)",
-				}}
-			>
-				{/* Tagline */}
-				<h2
-					style={{
-						margin: "0 0 1rem 0",
-						color: "#00ff00",
-						fontSize: "1.2rem",
-						fontFamily: "monospace",
-						fontWeight: "bold",
-					}}
-				>
-					$ ephemeral chat rooms
-				</h2>
-
-				<p
-					style={{
-						margin: "0 0 1.5rem 0",
-						color: "#aaaaaa",
-						fontFamily: "monospace",
-						fontSize: "0.95rem",
-						lineHeight: "1.6",
-					}}
-				>
-					Chat rooms governed by thermodynamics. Every message adds heat. Every
-					moment burns fuel. Keep talking or watch your room cool to oblivion.
-					Ephemeral by design, persistent by conversation.
-				</p>
-
-				{/* Feature Grid */}
-				<div
-					style={{
-						display: "grid",
-						gridTemplateColumns: "1fr 1fr",
-						gap: "1rem",
-						margin: "1.5rem 0",
-					}}
-				>
-					<Feature icon="⚡" label="Real-time" />
-					<Feature icon="⏱️" label="Ephemeral" />
-					<Feature icon="🔌" label="Live" />
-					<Feature icon="💬" label="Anonymous" />
+    ╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝`}
+					</pre>
+					<p className="homepage__pitch">
+						No accounts, no passwords. Pick a room or create one and you're in.
+						Each space is anonymous and real time, with a terminal style face.
+						Rooms don't last forever: their lifespan follows a thermodynamic
+						rhythm. They warm with the chat, hold while people are there, then
+						go quiet. Nothing here pretends to be permanent.
+					</p>
+					<ul className="homepage__tags" aria-label="Highlights">
+						<li>anonymous</li>
+						<li>no signup</li>
+						<li>real time</li>
+						<li>ephemeral</li>
+						<li>terminal style</li>
+					</ul>
 				</div>
-
-				{/* Separator */}
-				<hr
-					style={{
-						border: "none",
-						borderTop: "1px solid #00ff0033",
-						margin: "2rem 0",
-					}}
-				/>
-
-				{/* CTA Buttons */}
-				<div
-					style={{
-						display: "flex",
-						gap: "1rem",
-						justifyContent: "center",
-						flexWrap: "wrap",
-					}}
-				>
-					<button
-						type="button"
-						is-="button"
-						onClick={openDialog}
-						style={{
-							backgroundColor: "#00ff00",
-							color: "#000000",
-							padding: "0.75rem 1.5rem",
-							border: "none",
-							fontFamily: "monospace",
-							fontWeight: "bold",
-							cursor: "pointer",
-							fontSize: "0.95rem",
-							transition: "box-shadow 0.2s",
-						}}
-						onMouseEnter={(e) => {
-							e.currentTarget.style.boxShadow = "0 0 15px rgba(0, 255, 0, 0.6)";
-						}}
-						onMouseLeave={(e) => {
-							e.currentTarget.style.boxShadow = "none";
-						}}
-					>
-						→ create room
+				<div className="homepage__actions">
+					<button type="button" is-="button" onClick={openDialog}>
+						create room
 					</button>
-					<Link
-						to="/mechanics"
-						is-="button"
-						style={{
-							backgroundColor: "transparent",
-							color: "#00ff00",
-							padding: "0.75rem 1.5rem",
-							border: "2px solid #00ff00",
-							fontFamily: "monospace",
-							fontWeight: "bold",
-							fontSize: "0.95rem",
-							transition: "background-color 0.2s",
-							textDecoration: "none",
-						}}
-						onMouseEnter={(e) => {
-							(e.currentTarget as HTMLElement).style.backgroundColor =
-								"rgba(0, 255, 0, 0.1)";
-						}}
-						onMouseLeave={(e) => {
-							(e.currentTarget as HTMLElement).style.backgroundColor =
-								"transparent";
-						}}
-					>
+					<Link to="/mechanics" is-="button">
 						how it works
 					</Link>
 				</div>
 			</div>
 
-			{/* Terminal Footer */}
-			<div
-				style={{
-					color: "#555555",
-					fontFamily: "monospace",
-					fontSize: "0.85rem",
-					marginTop: "2rem",
-					textAlign: "center",
-				}}
-			>
-				<p style={{ margin: "0.5rem 0" }}>
-					n0k v0.1.0 • powered by thermodynamics
-				</p>
-				<p style={{ margin: "0.5rem 0", color: "#333333" }}>
-					$ terminal chat rooms for the ephemeral age
-				</p>
-				<p style={{ margin: "0.5rem 0", color: "#444444" }}>
+			<div className="homepage__panel" box-="square">
+				<HomepageErrorBoundary
+					fallback={
+						<p className="homepage__table-error">
+							Could not load the room list. Check your connection and reload.
+						</p>
+					}
+				>
+					<Suspense
+						fallback={
+							<div className="homepage__table-suspense" aria-busy="true">
+								<span is-="spinner" variant-="dots" speed-="medium" />
+								syncing room index…
+							</div>
+						}
+					>
+						<HomepageRoomsTable />
+					</Suspense>
+				</HomepageErrorBoundary>
+			</div>
+
+			<section className="homepage__status" aria-label="Status">
+				<div className="homepage__status-left">
+					<span className="homepage__status-app">[n0k]</span>
+					<span className="homepage__status-sep">·</span>
+					<span className="homepage__status-ctx">home</span>
+				</div>
+				<div className="homepage__status-right">
+					<ThemeSelector />
+				</div>
+			</section>
+
+			<footer className="homepage__footer">
+				<p style={{ margin: "0.25lh 0" }}>n0k v0.1.0</p>
+				<p style={{ margin: "0.25lh 0" }}>
 					made by{" "}
 					<a
 						href="https://procka.org"
 						target="_blank"
 						rel="noopener noreferrer"
-						style={{ color: "#555555", textDecoration: "underline" }}
 					>
 						Jason Procka (procka.org)
 					</a>
 				</p>
-			</div>
+			</footer>
 
 			<CreateRoomDialog ref={dialogRef} onCreated={handleCreated} />
 		</main>
-	);
-}
-
-function Feature({ icon, label }: { icon: string; label: string }) {
-	return (
-		<div
-			style={{
-				padding: "1rem",
-				borderLeft: "2px solid #00ff0055",
-				color: "#aaaaaa",
-				fontFamily: "monospace",
-				fontSize: "0.9rem",
-			}}
-		>
-			<div
-				style={{ color: "#00ff00", fontSize: "1.5rem", marginBottom: "0.5rem" }}
-			>
-				{icon}
-			</div>
-			<div style={{ color: "#00ff00" }}>{label}</div>
-		</div>
 	);
 }
 
@@ -249,7 +131,7 @@ const CreateRoomDialog = forwardRef<
 	function handleNameChange(value: string) {
 		setName(value);
 		if (value && !URL_SAFE.test(value)) {
-			setError("Only letters, numbers, hyphens, and underscores allowed");
+			setError("Only letters, numbers, underscores, and minus signs");
 		} else if (value.length > 32) {
 			setError("Name must be 32 characters or fewer");
 		} else {
@@ -268,6 +150,7 @@ const CreateRoomDialog = forwardRef<
 			});
 			setName("");
 			setDescription("");
+			await refreshRoomsCollection();
 			onCreated(id);
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "Failed to create room");
@@ -286,65 +169,38 @@ const CreateRoomDialog = forwardRef<
 	return (
 		<dialog
 			ref={ref}
+			className="homepage-dialog"
 			position-="center"
 			size-="small"
-			style={{ fontFamily: "monospace" }}
+			style={{ fontFamily: "var(--font-family, monospace)" }}
 		>
 			<form onSubmit={handleSubmit}>
 				<div style={{ marginBottom: "1rem" }}>
-					<strong style={{ color: "#00ff00" }}>$ new room</strong>
+					<strong>$ new room</strong>
 				</div>
-				<p
-					style={{ margin: "0 0 1rem 0", color: "#aaaaaa", fontSize: "0.9rem" }}
-				>
-					Give your room a name. Letters, numbers, hyphens, and underscores
-					only.
+				<p className="homepage-dialog__hint">
+					Give your room a name using letters, numbers, underscores, and minus
+					signs between segments if you like.
 				</p>
 				<div style={{ marginBottom: "1rem" }}>
-					<label
-						htmlFor="room-name"
-						style={{
-							display: "block",
-							marginBottom: "0.4rem",
-							color: "#aaaaaa",
-							fontSize: "0.85rem",
-						}}
-					>
+					<label htmlFor="room-name" className="homepage-dialog__label">
 						room name
 					</label>
 					<input
 						id="room-name"
 						is-="input"
 						type="text"
-						placeholder="my-room"
+						placeholder="my_room"
 						value={name}
 						onChange={(e) => handleNameChange(e.target.value)}
 						autoFocus
 						style={{ width: "100%", boxSizing: "border-box" }}
 					/>
-					{error && (
-						<p
-							style={{
-								margin: "0.4rem 0 0 0",
-								color: "#ff4444",
-								fontSize: "0.85rem",
-							}}
-						>
-							{error}
-						</p>
-					)}
+					{error ? <p className="homepage-dialog__error">{error}</p> : null}
 				</div>
 				<div style={{ marginBottom: "1rem" }}>
-					<label
-						htmlFor="room-description"
-						style={{
-							display: "block",
-							marginBottom: "0.4rem",
-							color: "#aaaaaa",
-							fontSize: "0.85rem",
-						}}
-					>
-						description <span style={{ color: "#555" }}>(optional)</span>
+					<label htmlFor="room-description" className="homepage-dialog__label">
+						description <span className="homepage-dialog__opt">(optional)</span>
 					</label>
 					<textarea
 						id="room-description"
@@ -360,50 +216,26 @@ const CreateRoomDialog = forwardRef<
 							resize: "vertical",
 						}}
 					/>
-					<p
-						style={{
-							margin: "0.25rem 0 0 0",
-							color: "#555",
-							fontSize: "0.8rem",
-							textAlign: "right",
-						}}
-					>
-						{description.length}/280
-					</p>
+					<p className="homepage-dialog__counter">{description.length}/280</p>
 				</div>
-				<div
-					style={{
-						display: "flex",
-						gap: "0.75rem",
-						justifyContent: "flex-end",
-					}}
-				>
-					<button
-						type="button"
-						is-="button"
-						onClick={handleClose}
-						style={{ fontFamily: "monospace" }}
-					>
+				<div className="homepage-dialog__actions">
+					<button type="button" is-="button" onClick={handleClose}>
 						cancel
 					</button>
 					<button
 						type="submit"
 						is-="button"
 						disabled={!name || !!error || loading}
-						style={{
-							fontFamily: "monospace",
-							backgroundColor: "#00ff00",
-							color: "#000",
-							opacity: !name || !!error || loading ? 0.5 : 1,
-							cursor: !name || !!error || loading ? "not-allowed" : "pointer",
-						}}
+						className="homepage-dialog__submit homepage-dialog__submit--primary"
 					>
 						{loading ? (
 							<span
 								is-="spinner"
 								variant-="dots"
 								speed-="medium"
-								style={{ color: "#000" }}
+								style={{
+									color: "var(--background0, var(--webtui-background-0))",
+								}}
 							/>
 						) : (
 							"create"

@@ -1,0 +1,42 @@
+@layer components {
+	.theme-selector {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 0.25ch;
+	}
+
+	.theme-selector__name {
+		color: var(--foreground1, var(--webtui-foreground-1));
+		min-width: 16ch;
+		text-align: center;
+	}
+
+	/*
+	 * WebTUI `button.css`: default fill + inverted text; `size-="small"` skips
+	 * gradient + 3lh, but fill/text still clash on dense status lines.
+	 */
+	.theme-selector button.theme-selector__btn {
+		appearance: none;
+		min-width: 2ch;
+		padding: 0 0.35ch;
+		height: 1lh;
+		margin: 0;
+		border: none;
+		background-color: transparent;
+		background-image: none;
+		color: var(--foreground0, var(--webtui-foreground-0));
+		font-family: inherit;
+		font-size: 1em;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	.theme-selector button.theme-selector__btn:hover {
+		color: var(--green, var(--gb-green, var(--nord14, #98c379)));
+	}
+
+	.theme-selector button.theme-selector__btn:active {
+		color: var(--foreground1, var(--webtui-foreground-1));
+	}
+}
