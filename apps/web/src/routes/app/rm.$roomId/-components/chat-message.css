@@ -14,10 +14,111 @@
 		font-size: 0.85em;
 	}
 
+	/* Message author + chat input prompt — Catppuccin → Gruvbox → Nord → Vitesse → Everforest → hex */
 	.chat-message__author {
 		font-weight: bold;
-		color: var(--green, var(--gb-green, var(--nord14, #98c379)));
 		flex-shrink: 0;
+	}
+
+	.chat-message__author[data-author-palette="0"],
+	.chat-input__prompt[data-author-palette="0"] {
+		color: var(
+			--green,
+			var(--gb-green, var(--nord14, var(--ef-green, #98c379)))
+		);
+	}
+
+	.chat-message__author[data-author-palette="1"],
+	.chat-input__prompt[data-author-palette="1"] {
+		color: var(
+			--blue,
+			var(--sapphire, var(--gb-blue, var(--nord10, var(--ef-blue, #61afef))))
+		);
+	}
+
+	.chat-message__author[data-author-palette="2"],
+	.chat-input__prompt[data-author-palette="2"] {
+		color: var(
+			--mauve,
+			var(--purple, var(--gb-purple, var(--nord15, var(--ef-purple, #c678dd))))
+		);
+	}
+
+	.chat-message__author[data-author-palette="3"],
+	.chat-input__prompt[data-author-palette="3"] {
+		color: var(
+			--yellow,
+			var(--gb-yellow, var(--nord13, var(--ef-yellow, #e5c07b)))
+		);
+	}
+
+	.chat-message__author[data-author-palette="4"],
+	.chat-input__prompt[data-author-palette="4"] {
+		color: var(--red, var(--gb-red, var(--nord11, #e06c75)));
+	}
+
+	.chat-message__author[data-author-palette="5"],
+	.chat-input__prompt[data-author-palette="5"] {
+		color: var(
+			--peach,
+			var(--orange, var(--gb-orange, var(--nord12, var(--ef-orange, #d19a66))))
+		);
+	}
+
+	.chat-message__author[data-author-palette="6"],
+	.chat-input__prompt[data-author-palette="6"] {
+		color: var(
+			--teal,
+			var(--aqua, var(--gb-aqua, var(--nord8, var(--ef-aqua, #56b6c2))))
+		);
+	}
+
+	.chat-message__author[data-author-palette="7"],
+	.chat-input__prompt[data-author-palette="7"] {
+		color: var(--pink, var(--flamingo, var(--nord9, #f38ba8)));
+	}
+
+	.chat-message__author[data-author-palette="8"],
+	.chat-input__prompt[data-author-palette="8"] {
+		color: var(--sky, var(--cyan, var(--nord7, var(--ef-aqua, #89dceb))));
+	}
+
+	.chat-message__author[data-author-palette="9"],
+	.chat-input__prompt[data-author-palette="9"] {
+		color: var(--lavender, var(--purple, var(--nord15, var(--mauve, #b4befe))));
+	}
+
+	.chat-message__author[data-author-palette="10"],
+	.chat-input__prompt[data-author-palette="10"] {
+		color: var(--maroon, var(--red, var(--gb-red, var(--nord11, #be5046))));
+	}
+
+	.chat-message__author[data-author-palette="11"],
+	.chat-input__prompt[data-author-palette="11"] {
+		color: var(--rosewater, var(--fg, var(--nord5, #f5e0dc)));
+	}
+
+	.chat-message__author[data-author-palette="12"],
+	.chat-input__prompt[data-author-palette="12"] {
+		color: var(--flamingo, var(--pink, var(--nord12, #fc929e)));
+	}
+
+	.chat-message__author[data-author-palette="13"],
+	.chat-input__prompt[data-author-palette="13"] {
+		color: var(--nord7, var(--teal, var(--gb-aqua, var(--ef-aqua, #8fbcbb))));
+	}
+
+	.chat-message__author[data-author-palette="14"],
+	.chat-input__prompt[data-author-palette="14"] {
+		color: var(--nord9, var(--blue, var(--gb-blue, var(--ef-blue, #81a1c1))));
+	}
+
+	.chat-message__author[data-author-palette="15"],
+	.chat-input__prompt[data-author-palette="15"] {
+		color: var(
+			--nord11,
+			var(--yellow, var(--gb-yellow, var(--ef-yellow, #ebcb8b)))
+		);
 	}
 
 	.chat-message__content {

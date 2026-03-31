@@ -10,7 +10,6 @@
 	}
 
 	.chat-input__prompt {
-		color: var(--green, var(--gb-green, var(--nord14, #98c379)));
 		font-weight: bold;
 		flex-shrink: 0;
 		white-space: nowrap;

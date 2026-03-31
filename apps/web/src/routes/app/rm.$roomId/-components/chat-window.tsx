@@ -2,7 +2,17 @@ import { useChatStore } from "../-store";
 import { ChatMessage } from "./chat-message";
 import "./chat-window.css";
 
-export function ChatWindow() {
+interface ChatWindowProps {
+	roomId: string;
+	viewerUserId?: string | undefined;
+	viewerAuthorLabel?: string | undefined;
+}
+
+export function ChatWindow({
+	roomId,
+	viewerUserId,
+	viewerAuthorLabel,
+}: ChatWindowProps) {
 	const messages = useChatStore((state) => state.messages);
 
 	return (
@@ -16,7 +26,15 @@ export function ChatWindow() {
 				// CSS puts DOM-first at the visual bottom, giving terminal behaviour.
 				[...messages]
 					.reverse()
-					.map((message) => <ChatMessage key={message.id} message={message} />)
+					.map((message) => (
+						<ChatMessage
+							key={message.id}
+							message={message}
+							roomId={roomId}
+							viewerUserId={viewerUserId}
+							viewerAuthorLabel={viewerAuthorLabel}
+						/>
+					))
 			)}
 		</div>
 	);

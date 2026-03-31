@@ -3,6 +3,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { roomsCollection } from "@/data/rooms/collections";
 import { useSession } from "@/features/auth/query";
 import { ChatInput } from "./-components/chat-input";
+import {
+	ChatParticipatePrompt,
+	ChatSessionPending,
+} from "./-components/chat-participate-prompt";
 import { ChatWindow } from "./-components/chat-window";
 import { RoomSidebar } from "./-components/room-sidebar";
 import { StatusBar } from "./-components/status-bar";
@@ -45,6 +49,7 @@ function RouteComponent() {
 	} = useLiveQuery((q) => q.from({ room: roomsCollection }), []);
 
 	const { data: session, isPending: sessionPending } = useSession();
+	const viewerUserId = session?.user?.id;
 	const user = session?.user as
 		| {
 				displayUsername?: string | null;
@@ -55,10 +60,10 @@ function RouteComponent() {
 	const currentUser =
 		sessionPending && !session
 			? "…"
-			: (user?.displayUsername?.trim() ||
-					user?.username?.trim() ||
-					user?.name?.trim() ||
-					"guest");
+			: user?.displayUsername?.trim() ||
+				user?.username?.trim() ||
+				user?.name?.trim() ||
+				"guest";
 	const { sendMessage } = useRoomWs(roomId);
 
 	const room = rooms?.find((r) => r.id === roomId);
@@ -81,8 +86,23 @@ function RouteComponent() {
 			</div>
 			<div className="chat-page__body">
 				<div className="chat-page__main">
-					<ChatWindow />
-					<ChatInput currentUser={currentUser} onSend={sendMessage} />
+					<ChatWindow
+						roomId={roomId}
+						viewerUserId={session?.user?.id}
+						viewerAuthorLabel={currentUser}
+					/>
+					{sessionPending && !session ? (
+						<ChatSessionPending />
+					) : viewerUserId ? (
+						<ChatInput
+							currentUser={currentUser}
+							roomId={roomId}
+							userId={viewerUserId}
+							onSend={sendMessage}
+						/>
+					) : (
+						<ChatParticipatePrompt />
+					)}
 				</div>
 				<RoomSidebar />
 			</div>

@@ -1,12 +1,21 @@
 import { useState } from "react";
+import { usernamePaletteIndex } from "@/features/chat/utils/usernames";
+import "./chat-message.css";
 import "./chat-input.css";
 
 interface ChatInputProps {
 	currentUser: string;
+	roomId: string;
+	userId: string;
 	onSend: (author: string, content: string) => void;
 }
 
-export function ChatInput({ currentUser, onSend }: ChatInputProps) {
+export function ChatInput({
+	currentUser,
+	roomId,
+	userId,
+	onSend,
+}: ChatInputProps) {
 	const [inputValue, setInputValue] = useState("");
 
 	const handleSend = () => {
@@ -23,9 +32,16 @@ export function ChatInput({ currentUser, onSend }: ChatInputProps) {
 		}
 	};
 
+	const palette = usernamePaletteIndex(userId, roomId);
+
 	return (
 		<div className="chat-input">
-			<span className="chat-input__prompt">{currentUser}&gt;</span>
+			<span
+				className="chat-input__prompt"
+				data-author-palette={String(palette)}
+			>
+				{currentUser}&gt;
+			</span>
 			<input
 				type="text"
 				className="chat-input__field"

@@ -1,0 +1,38 @@
+@layer components {
+	.chat-participate-prompt {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.75ch 1ch;
+		padding: 0.25lh 1ch;
+		border-top: 1px solid var(--foreground0, var(--webtui-foreground-2));
+		flex-shrink: 0;
+	}
+
+	.chat-participate-prompt__action {
+		cursor: pointer;
+		font-family: inherit;
+		font-size: inherit;
+	}
+
+	.chat-participate-prompt__action:disabled {
+		cursor: wait;
+		opacity: 0.85;
+	}
+
+	.chat-participate-prompt__error {
+		color: var(--red, var(--gb-red, var(--nord11, #e06c75)));
+		font-size: 0.9em;
+	}
+
+	.chat-auth-pending {
+		display: flex;
+		align-items: center;
+		padding: 0.25lh 1ch;
+		border-top: 1px solid var(--foreground0, var(--webtui-foreground-2));
+		flex-shrink: 0;
+		color: var(--foreground2, var(--webtui-foreground-2));
+		font-size: 0.9em;
+	}
+}
