@@ -18,6 +18,7 @@ const app = await alchemy("n0k", {
 		process.env.NODE_ENV === "production" || process.env.CI
 			? (scope) =>
 					new CloudflareStateStore(scope, {
+						scriptName: "n0k-alchemy-state-service",
 						stateToken: alchemy.secret(process.env.ALCHEMY_STATE_TOKEN),
 					})
 			: undefined, // Uses default FileSystemStateStore
