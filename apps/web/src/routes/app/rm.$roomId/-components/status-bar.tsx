@@ -20,10 +20,11 @@ const MOCK_ROOM = {
 };
 
 interface StatusBarProps {
-	roomId: string;
+	/** Same label as the chat header, e.g. `rm:name(1)` or `rm:…` while loading. */
+	roomTitle: string;
 }
 
-export function StatusBar({ roomId }: StatusBarProps) {
+export function StatusBar({ roomTitle }: StatusBarProps) {
 	const theme = useThemeStore((state) => state.theme);
 	const setTheme = useThemeStore((state) => state.setTheme);
 
@@ -45,7 +46,7 @@ export function StatusBar({ roomId }: StatusBarProps) {
 			<div className="status-bar__left">
 				<span className="status-bar__app">[n0k]</span>
 				<span className="status-bar__sep">·</span>
-				<span className="status-bar__room">rm:{roomId}</span>
+				<span className="status-bar__room">{roomTitle}</span>
 				<span className="status-bar__sep">│</span>
 				<span
 					className={`status-bar__room-status status-bar__room-status--${MOCK_ROOM.status.toLowerCase()}`}

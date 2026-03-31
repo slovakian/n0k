@@ -1,0 +1,21 @@
+@layer components {
+	.room-not-found {
+		padding: 1lh 1ch;
+		max-width: 72ch;
+	}
+
+	.room-not-found__message {
+		margin: 0 0 1lh;
+		color: var(--foreground0, var(--webtui-foreground-0));
+	}
+
+	.room-not-found__message code {
+		font-size: 1em;
+	}
+
+	.room-not-found__link {
+		color: var(--foreground1, var(--webtui-foreground-1));
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+}
